@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class CityRequestDto {
+@Builder
+public class MovieResponseDto {
+    private Long id;
     private String name;
 }

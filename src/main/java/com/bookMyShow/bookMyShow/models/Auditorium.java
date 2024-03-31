@@ -18,4 +18,7 @@ public class Auditorium extends BaseModel {
 
     @ManyToOne
     private Theatre theatre;
+
+    @OneToMany(mappedBy = "auditorium")
+    private List<Show> shows;
 }

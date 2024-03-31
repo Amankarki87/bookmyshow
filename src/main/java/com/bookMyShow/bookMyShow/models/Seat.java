@@ -11,7 +11,7 @@ import lombok.Data;
 public class Seat extends BaseModel {
     private String seatNumber;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private SeatType seatType;
 
     @ManyToOne

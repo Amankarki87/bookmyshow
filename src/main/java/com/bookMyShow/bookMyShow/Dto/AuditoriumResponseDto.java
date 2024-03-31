@@ -4,6 +4,9 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class CityRequestDto {
+@Builder
+public class AuditoriumResponseDto {
+    private Long id;
     private String name;
+    private Long theatreId;
 }

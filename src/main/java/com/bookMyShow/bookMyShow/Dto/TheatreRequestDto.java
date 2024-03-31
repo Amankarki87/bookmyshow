@@ -1,9 +1,10 @@
 package com.bookMyShow.bookMyShow.Dto;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class CityRequestDto {
+public class TheatreRequestDto {
     private String name;
+    private String address;
+    private Long cityId;
 }
