@@ -8,10 +8,9 @@ import com.bookMyShow.bookMyShow.services.TheatreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(ApiConstant.API_V1_VERSIONING + TheatreConstant.THEATRE_BASE_URL)
@@ -42,5 +41,20 @@ public class TheatreController {
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<ResponseFormatDto> theatres(@RequestParam String cityName) {
+        List<Theatre> theatres = theatreService.theatres(cityName);
+
+        ResponseFormatDto response = ResponseFormatDto.builder()
+                .status(ApiConstant.SUCCESS)
+                .data(theatres)
+                .statusCode(HttpStatus.CREATED)
+                .message(TheatreConstant.FETCH_THEATRE)
+                .build();
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 }

@@ -8,12 +8,14 @@ import com.bookMyShow.bookMyShow.models.Auditorium;
 import com.bookMyShow.bookMyShow.models.Theatre;
 import com.bookMyShow.bookMyShow.repositories.AuditoriumRepository;
 import com.bookMyShow.bookMyShow.repositories.TheatreRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Transactional
 @Service
 public class AuditoriumServiceImpl implements AuditoriumService {
 
