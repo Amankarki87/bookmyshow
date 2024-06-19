@@ -4,7 +4,6 @@ import com.bookMyShow.bookMyShow.constants.ApiConstant;
 import com.bookMyShow.bookMyShow.constants.AuditoriumConstant;
 import com.bookMyShow.bookMyShow.constants.MovieConstant;
 import com.bookMyShow.bookMyShow.exceptions.Error;
-import com.bookMyShow.bookMyShow.exceptions.ErrorResponse;
 import com.bookMyShow.bookMyShow.models.Auditorium;
 import com.bookMyShow.bookMyShow.models.Movie;
 import com.bookMyShow.bookMyShow.models.Show;
@@ -33,33 +32,27 @@ public class ShowServiceImpl implements ShowService {
         Optional<Auditorium> auditorium = auditoriumRepository.findById(auditoriumId);
 
         if(!auditorium.isPresent()) {
-            ErrorResponse errorResponse = ErrorResponse.builder()
-                    .code(HttpStatus.NOT_FOUND)
-                    .status(ApiConstant.ERROR)
-                    .message(AuditoriumConstant.AUDITORIUM_NOT_FOUND)
-                    .build();
 
-            Error error = Error.builder()
-                    .errorResponse(errorResponse)
-                    .build();
-
-            throw error;
+//            Error error = Error.builder()
+//                    .code(HttpStatus.NOT_FOUND)
+//                    .status(ApiConstant.ERROR)
+//                    .message(AuditoriumConstant.AUDITORIUM_NOT_FOUND)
+//                    .build();
+//
+//            throw error;
         }
 
         Optional<Movie> movie = movieRepository.findById(movieId);
 
         if(!movie.isPresent()) {
-            ErrorResponse errorResponse = ErrorResponse.builder()
-                    .code(HttpStatus.NOT_FOUND)
-                    .status(ApiConstant.ERROR)
-                    .message(MovieConstant.MOVIE_NOT_FOUND)
-                    .build();
 
-            Error error = Error.builder()
-                    .errorResponse(errorResponse)
-                    .build();
-
-            throw error;
+//            Error error = Error.builder()
+//                    .code(HttpStatus.NOT_FOUND)
+//                    .status(ApiConstant.ERROR)
+//                    .message(MovieConstant.MOVIE_NOT_FOUND)
+//                    .build();
+//
+//            throw error;
         }
 
         Show show = new Show();

@@ -4,7 +4,6 @@ import com.bookMyShow.bookMyShow.constants.ApiConstant;
 import com.bookMyShow.bookMyShow.constants.SeatConstant;
 import com.bookMyShow.bookMyShow.constants.ShowConstant;
 import com.bookMyShow.bookMyShow.exceptions.Error;
-import com.bookMyShow.bookMyShow.exceptions.ErrorResponse;
 import com.bookMyShow.bookMyShow.models.*;
 import com.bookMyShow.bookMyShow.repositories.SeatRepository;
 import com.bookMyShow.bookMyShow.repositories.ShowRepository;
@@ -31,30 +30,28 @@ public class ShowSeatServiceImpl implements ShowSeatService {
         Optional<Show> show = showRepository.findById(showId);
 
         if(!show.isPresent()) {
-            ErrorResponse errorResponse = ErrorResponse.builder()
-                    .code(HttpStatus.NOT_FOUND)
-                    .status(ApiConstant.ERROR)
-                    .message(ShowConstant.SHOW_NOT_FOUND)
-                    .build();
+//            ErrorResponse errorResponse = ErrorResponse.builder()
+//                    .code(HttpStatus.NOT_FOUND)
+//                    .status(ApiConstant.ERROR)
+//                    .message(ShowConstant.SHOW_NOT_FOUND)
+//                    .build();
 
-            Error error = Error.builder()
-                    .errorResponse(errorResponse)
-                    .build();
-
-            throw error;
+//            Error error = Error.builder()
+//                    .code(HttpStatus.NOT_FOUND)
+//                    .status(ApiConstant.ERROR)
+//                    .message(ShowConstant.SHOW_NOT_FOUND)
+//                    .build();
+//
+//            throw error;
         }
 
         Optional<Seat> seat = seatRepository.findById(seatId);
 
         if(!seat.isPresent()) {
-            ErrorResponse errorResponse = ErrorResponse.builder()
+            Error error = Error.builder()
                     .code(HttpStatus.NOT_FOUND)
                     .status(ApiConstant.ERROR)
                     .message(SeatConstant.SEAT_NOT_FOUND)
-                    .build();
-
-            Error error = Error.builder()
-                    .errorResponse(errorResponse)
                     .build();
 
             throw error;

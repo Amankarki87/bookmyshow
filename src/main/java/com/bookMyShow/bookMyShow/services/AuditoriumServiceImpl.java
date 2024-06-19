@@ -30,14 +30,11 @@ public class AuditoriumServiceImpl implements AuditoriumService {
         Optional<Theatre> theatre = theatreRepository.findById(theatreId);
 
         if(!theatre.isPresent()) {
-            ErrorResponse errorResponse = ErrorResponse.builder()
+
+            Error error = Error.builder()
                     .code(HttpStatus.NOT_FOUND)
                     .status(ApiConstant.ERROR)
                     .message(TheatreConstant.THEATRE_NOT_FOUND)
-                    .build();
-
-            Error error = Error.builder()
-                    .errorResponse(errorResponse)
                     .build();
 
             throw error;

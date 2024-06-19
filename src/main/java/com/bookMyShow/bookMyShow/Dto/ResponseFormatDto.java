@@ -14,5 +14,5 @@ public class ResponseFormatDto<T> {
     private HttpStatus statusCode;
     private String message;
     private T data;
-    private Map<String,T> meta = new HashMap<>(); // Use for holding pagination or any other additional properties for the payload.
+    private Map<String,T> meta = new HashMap<String,T>(); // Use for holding pagination or any other additional properties for the payload.
 }

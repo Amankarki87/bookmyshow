@@ -5,6 +5,7 @@ import com.bookMyShow.bookMyShow.constants.ApiConstant;
 import com.bookMyShow.bookMyShow.constants.MovieConstant;
 import com.bookMyShow.bookMyShow.models.Movie;
 import com.bookMyShow.bookMyShow.services.MovieService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,11 @@ public class MovieController {
     MovieService movieService;
 
     @PostMapping
-    public ResponseEntity<ResponseFormatDto> save(@RequestBody MovieRequestDto movieRequestDto) {
-        Movie movie = movieService.save(movieRequestDto.getName());
+    public ResponseEntity<ResponseFormatDto> save(@Valid @RequestBody MovieRequestDto movieRequestDto) {
+        Movie movie = movieService.save(
+                movieRequestDto.getName(),
+                movieRequestDto.getMovieGenre()
+        );
 
         MovieResponseDto movieResponseDto = MovieResponseDto.builder().
                 id(movie.getId()).

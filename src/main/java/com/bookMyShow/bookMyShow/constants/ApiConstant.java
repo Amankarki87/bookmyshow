@@ -4,5 +4,5 @@ public interface ApiConstant {
     String API_V1_VERSIONING = "/v1";
     String SUCCESS = "Success";
     String ERROR = "Error";
-    String NOT_FOUND_ERROR = "NOT_FOUND_ERROR";
+    String MOVIE_ALREADY_EXISTS = "Movie already exists";
 }
