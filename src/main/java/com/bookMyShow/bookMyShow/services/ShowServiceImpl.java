@@ -33,26 +33,25 @@ public class ShowServiceImpl implements ShowService {
 
         if(!auditorium.isPresent()) {
 
-//            Error error = Error.builder()
-//                    .code(HttpStatus.NOT_FOUND)
-//                    .status(ApiConstant.ERROR)
-//                    .message(AuditoriumConstant.AUDITORIUM_NOT_FOUND)
-//                    .build();
-//
-//            throw error;
+            Error error = Error.builder()
+                    .code(HttpStatus.NOT_FOUND)
+                    .status(ApiConstant.ERROR)
+                    .message(AuditoriumConstant.AUDITORIUM_NOT_FOUND)
+                    .build();
+
+            throw error;
         }
 
         Optional<Movie> movie = movieRepository.findById(movieId);
 
         if(!movie.isPresent()) {
+            Error error = Error.builder()
+                    .code(HttpStatus.NOT_FOUND)
+                    .status(ApiConstant.ERROR)
+                    .message(MovieConstant.MOVIE_NOT_FOUND)
+                    .build();
 
-//            Error error = Error.builder()
-//                    .code(HttpStatus.NOT_FOUND)
-//                    .status(ApiConstant.ERROR)
-//                    .message(MovieConstant.MOVIE_NOT_FOUND)
-//                    .build();
-//
-//            throw error;
+            throw error;
         }
 
         Show show = new Show();

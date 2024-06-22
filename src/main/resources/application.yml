@@ -1,5 +1,7 @@
 server:
-  port: 8081
+  port: {SERVER_PORT}
+  servlet:
+    context-path: /api
 
 spring:
   jpa:
@@ -11,6 +13,6 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://localhost:5431/bookmyshow
-    username: postgres
-    password:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}

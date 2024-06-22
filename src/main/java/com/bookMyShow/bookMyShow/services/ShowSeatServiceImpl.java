@@ -30,19 +30,13 @@ public class ShowSeatServiceImpl implements ShowSeatService {
         Optional<Show> show = showRepository.findById(showId);
 
         if(!show.isPresent()) {
-//            ErrorResponse errorResponse = ErrorResponse.builder()
-//                    .code(HttpStatus.NOT_FOUND)
-//                    .status(ApiConstant.ERROR)
-//                    .message(ShowConstant.SHOW_NOT_FOUND)
-//                    .build();
+            Error error = Error.builder()
+                    .code(HttpStatus.NOT_FOUND)
+                    .status(ApiConstant.ERROR)
+                    .message(ShowConstant.SHOW_NOT_FOUND)
+                    .build();
 
-//            Error error = Error.builder()
-//                    .code(HttpStatus.NOT_FOUND)
-//                    .status(ApiConstant.ERROR)
-//                    .message(ShowConstant.SHOW_NOT_FOUND)
-//                    .build();
-//
-//            throw error;
+            throw error;
         }
 
         Optional<Seat> seat = seatRepository.findById(seatId);
