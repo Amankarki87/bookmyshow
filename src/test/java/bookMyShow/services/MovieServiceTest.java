@@ -31,21 +31,23 @@ public class MovieServiceTest {
     @InjectMocks
     private MovieServiceImpl movieService;
 
+    private Movie movieDto;
+
     @BeforeEach
     void init(){
         MockitoAnnotations.initMocks(this);
-    }
-
-    @Test
-    public void saveMovieTest() {
-        Movie moviedto = Movie
+        movieDto = Movie
                 .builder()
                 .name("Test")
                 .movieGenre(Genre.COMEDY)
                 .build();
+    }
+
+    @Test
+    public void saveMovieTest() {
 
         when(movieRepository.findByName(Mockito.anyString())).thenReturn(Optional.empty());
-        when(movieRepository.save(moviedto)).thenReturn(moviedto);
+        when(movieRepository.save(movieDto)).thenReturn(movieDto);
         Movie result = movieService.createMovie("Test",Genre.COMEDY);
         Assert.assertEquals(result.getName(), "Test");
         Assert.assertEquals(result.getMovieGenre(),Genre.COMEDY);
@@ -54,13 +56,8 @@ public class MovieServiceTest {
 
     @Test
     public void saveMovieTestWhenConflict() {
-        Movie movie = Movie
-                .builder()
-                .name("Test")
-                .movieGenre(Genre.COMEDY)
-                .build();
 
-        when(movieRepository.findByName(Mockito.anyString())).thenReturn(Optional.ofNullable(movie));
+        when(movieRepository.findByName(Mockito.anyString())).thenReturn(Optional.ofNullable(movieDto));
 
         ElementAlreadyExistsException error = assertThrows(ElementAlreadyExistsException.class, () -> {
             movieService.createMovie("test1",Genre.COMEDY);
