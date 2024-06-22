@@ -2,7 +2,7 @@ package bookMyShow.services;
 
 import bookMyShow.utils.MockDatabaseConfiguration;
 import com.bookMyShow.bookMyShow.constants.ApiConstant;
-import com.bookMyShow.bookMyShow.exceptions.Error;
+import com.bookMyShow.bookMyShow.exceptions.ElementAlreadyExistsException;
 import com.bookMyShow.bookMyShow.models.Genre;
 import com.bookMyShow.bookMyShow.models.Movie;
 import com.bookMyShow.bookMyShow.repositories.MovieRepository;
@@ -15,7 +15,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Optional;
@@ -47,7 +46,7 @@ public class MovieServiceTest {
 
         when(movieRepository.findByName(Mockito.anyString())).thenReturn(Optional.empty());
         when(movieRepository.save(moviedto)).thenReturn(moviedto);
-        Movie result = movieService.save("Test",Genre.COMEDY);
+        Movie result = movieService.createMovie("Test",Genre.COMEDY);
         Assert.assertEquals(result.getName(), "Test");
         Assert.assertEquals(result.getMovieGenre(),Genre.COMEDY);
     }
@@ -63,12 +62,10 @@ public class MovieServiceTest {
 
         when(movieRepository.findByName(Mockito.anyString())).thenReturn(Optional.ofNullable(movie));
 
-        Error error = assertThrows(Error.class, () -> {
-            movieService.save("test1",Genre.COMEDY);
+        ElementAlreadyExistsException error = assertThrows(ElementAlreadyExistsException.class, () -> {
+            movieService.createMovie("test1",Genre.COMEDY);
         });
 
         Assert.assertEquals(error.getMessage(), ApiConstant.MOVIE_ALREADY_EXISTS);
-        Assert.assertEquals(error.getCode(), HttpStatus.CONFLICT);
-        Assert.assertEquals(error.getStatus(),ApiConstant.ERROR);
     }
 }

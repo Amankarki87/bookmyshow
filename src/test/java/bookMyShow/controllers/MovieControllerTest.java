@@ -41,7 +41,7 @@ public class MovieControllerTest {
 
         String json = new ObjectMapper().writeValueAsString(movie);
 
-        Mockito.when(movieService.save(Mockito.anyString(),Mockito.any())).thenReturn(movie);
+        Mockito.when(movieService.createMovie(Mockito.anyString(),Mockito.any())).thenReturn(movie);
         mockMvc.perform(
                 MockMvcRequestBuilders.post(URL)
                         .content(json).contentType(MediaType.APPLICATION_JSON)

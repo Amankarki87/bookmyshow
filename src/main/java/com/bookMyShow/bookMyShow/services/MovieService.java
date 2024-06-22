@@ -4,5 +4,5 @@ import com.bookMyShow.bookMyShow.models.Genre;
 import com.bookMyShow.bookMyShow.models.Movie;
 
 public interface MovieService {
-    Movie save(String name, Genre movieGenre);
+    Movie createMovie(String name, Genre movieGenre);
 }

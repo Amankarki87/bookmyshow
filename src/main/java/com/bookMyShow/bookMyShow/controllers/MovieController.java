@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.*;
 public class MovieController {
 
     @Autowired
-    MovieService movieService;
+    private MovieService movieService;
 
     @PostMapping
-    public ResponseEntity<ResponseFormatDto> save(@Valid @RequestBody MovieRequestDto movieRequestDto) {
-        Movie movie = movieService.save(
+    public ResponseEntity<ResponseFormatDto> createMovie(@Valid @RequestBody MovieRequestDto movieRequestDto) {
+        Movie movie = movieService.createMovie(
                 movieRequestDto.getName(),
                 movieRequestDto.getMovieGenre()
         );
@@ -31,10 +31,7 @@ public class MovieController {
                 build();
 
         ResponseFormatDto response = ResponseFormatDto.builder()
-                .status(ApiConstant.SUCCESS)
                 .data(movieResponseDto)
-                .statusCode(HttpStatus.CREATED)
-                .message(MovieConstant.MOVIE_CREATED)
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.OK);
