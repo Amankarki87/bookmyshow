@@ -6,6 +6,8 @@ import lombok.Data;
 @Data
 @Builder
 public class CityResponseDto {
+    /** City id. */
     private Long id;
+    /** City name. */
     private String name;
 }
