@@ -13,5 +13,5 @@ public class ErrorResponse {
     @Builder.Default
     private String stackTrace = "";
     @Builder.Default
-    private List<ErrorResponse> errors = new ArrayList<>();
+    private List<ValidationError> errors = new ArrayList<>();
 }

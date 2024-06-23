@@ -17,6 +17,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie createMovie(String name,Genre movieGenre) {
         Optional<Movie> movie = movieRepository.findByName(name);
+        String movieName = movie.get().getName();
 
         if (movie.isPresent()) {
             throw new ElementAlreadyExistsException(ApiConstant.MOVIE_ALREADY_EXISTS);
