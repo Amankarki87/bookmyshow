@@ -10,7 +10,8 @@ import java.util.*;
 public class ErrorResponse {
     private String status;
     private String message;
-    private String stackTrace;
+    @Builder.Default
+    private String stackTrace = "";
     @Builder.Default
     private List<ErrorResponse> errors = new ArrayList<>();
 }
