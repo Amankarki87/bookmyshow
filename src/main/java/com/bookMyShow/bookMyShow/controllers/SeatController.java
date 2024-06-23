@@ -31,10 +31,7 @@ public class SeatController {
                 .build();
 
         ResponseFormatDto response = ResponseFormatDto.builder()
-                .status(ApiConstant.SUCCESS)
                 .data(seatResponseDto)
-                .statusCode(HttpStatus.CREATED)
-                .message(SeatConstant.SEAT_CREATED)
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.OK);

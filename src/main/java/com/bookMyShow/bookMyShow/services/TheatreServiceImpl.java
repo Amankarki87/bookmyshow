@@ -3,7 +3,6 @@ package com.bookMyShow.bookMyShow.services;
 import com.bookMyShow.bookMyShow.constants.ApiConstant;
 import com.bookMyShow.bookMyShow.constants.CityConstant;
 import com.bookMyShow.bookMyShow.exceptions.Error;
-import com.bookMyShow.bookMyShow.exceptions.ErrorResponse;
 import com.bookMyShow.bookMyShow.models.City;
 import com.bookMyShow.bookMyShow.models.Theatre;
 import com.bookMyShow.bookMyShow.repositories.CityRepository;
@@ -35,14 +34,12 @@ public class TheatreServiceImpl implements TheatreService {
         Optional<City> city = cityRepository.findById(cityId);
 
         if(!city.isPresent()) {
-            ErrorResponse errorResponse = ErrorResponse.builder()
+
+            Error error = Error
+                    .builder()
                     .code(HttpStatus.NOT_FOUND)
                     .status(ApiConstant.ERROR)
                     .message(CityConstant.CITY_NOT_FOUND)
-                    .build();
-
-            Error error = Error.builder()
-                    .errorResponse(errorResponse)
                     .build();
 
             throw error;

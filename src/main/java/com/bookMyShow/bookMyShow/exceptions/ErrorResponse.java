@@ -2,16 +2,16 @@ package com.bookMyShow.bookMyShow.exceptions;
 
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.http.HttpStatus;
 
-import java.util.HashMap;
+import java.util.*;
 
 @Data
 @Builder
-public class ErrorResponse<T> {
+public class ErrorResponse {
     private String status;
-    private HttpStatus code;
     private String message;
-    private HashMap<String,T> data;
-    private HashMap<String,T> meta;
+    @Builder.Default
+    private String stackTrace = "";
+    @Builder.Default
+    private List<ErrorResponse> errors = new ArrayList<>();
 }

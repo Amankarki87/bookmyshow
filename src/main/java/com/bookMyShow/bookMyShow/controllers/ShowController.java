@@ -34,10 +34,7 @@ public class ShowController {
                 build();
 
         ResponseFormatDto response = ResponseFormatDto.builder()
-                .status(ApiConstant.SUCCESS)
                 .data(showResponseDto)
-                .statusCode(HttpStatus.CREATED)
-                .message(ShowConstant.SHOW_CREATED)
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.OK);

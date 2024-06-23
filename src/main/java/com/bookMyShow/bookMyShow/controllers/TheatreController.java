@@ -34,10 +34,7 @@ public class TheatreController {
                 .build();
 
         ResponseFormatDto response = ResponseFormatDto.builder()
-                .status(ApiConstant.SUCCESS)
                 .data(theatreResponse)
-                .statusCode(HttpStatus.CREATED)
-                .message(TheatreConstant.THEATRE_CREATED)
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -48,10 +45,7 @@ public class TheatreController {
         List<Theatre> theatres = theatreService.theatres(cityName);
 
         ResponseFormatDto response = ResponseFormatDto.builder()
-                .status(ApiConstant.SUCCESS)
                 .data(theatres)
-                .statusCode(HttpStatus.CREATED)
-                .message(TheatreConstant.FETCH_THEATRE)
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.OK);

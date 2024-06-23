@@ -3,7 +3,6 @@ package com.bookMyShow.bookMyShow.services;
 import com.bookMyShow.bookMyShow.constants.ApiConstant;
 import com.bookMyShow.bookMyShow.constants.AuditoriumConstant;
 import com.bookMyShow.bookMyShow.exceptions.Error;
-import com.bookMyShow.bookMyShow.exceptions.ErrorResponse;
 import com.bookMyShow.bookMyShow.models.Auditorium;
 import com.bookMyShow.bookMyShow.models.Seat;
 import com.bookMyShow.bookMyShow.models.SeatType;
@@ -28,14 +27,10 @@ public class SeatServiceImpl implements SeatService {
         Optional<Auditorium> auditorium = auditoriumRepository.findById(auditoriumId);
 
         if(!auditorium.isPresent()) {
-            ErrorResponse errorResponse = ErrorResponse.builder()
+            Error error = Error.builder()
                     .code(HttpStatus.NOT_FOUND)
                     .status(ApiConstant.ERROR)
                     .message(AuditoriumConstant.AUDITORIUM_NOT_FOUND)
-                    .build();
-
-            Error error = Error.builder()
-                    .errorResponse(errorResponse)
                     .build();
 
             throw error;

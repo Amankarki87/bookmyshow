@@ -31,10 +31,7 @@ public class CityController {
                 build();
 
         ResponseFormatDto response = ResponseFormatDto.builder()
-                .status(ApiConstant.SUCCESS)
                 .data(cityResponseDto)
-                .statusCode(HttpStatus.CREATED)
-                .message(CityConstant.CITY_CREATED)
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.OK);
