@@ -19,7 +19,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//@SpringBootTest
 @WebMvcTest(value=MovieController.class)
 @ContextConfiguration(classes = {MovieController.class})
 public class MovieControllerTest {
