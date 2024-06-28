@@ -54,6 +54,14 @@ public class ApplicationExceptionHandler {
         return buildErrorResponse(ex,HttpStatus.BAD_REQUEST,false,errors);
     }
 
+    @ExceptionHandler(ElementNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Object> handleElementNotFoundException(
+            ElementNotFoundException exception
+    ) {
+        return buildErrorResponse(exception,HttpStatus.CONFLICT,false);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleException(Exception ex){
         return buildErrorResponse(ex,HttpStatus.INTERNAL_SERVER_ERROR,true);
