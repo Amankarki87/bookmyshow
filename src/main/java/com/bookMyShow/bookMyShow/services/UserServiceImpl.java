@@ -62,10 +62,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String email, String password) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                email, password
-        ));
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(email, password);
+
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         Optional<User> user = userRepository.findByEmail(email);

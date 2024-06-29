@@ -1,9 +1,7 @@
 package com.bookMyShow.bookMyShow.controllers;
 
-import com.bookMyShow.bookMyShow.Dto.LoginRequestDto;
-import com.bookMyShow.bookMyShow.Dto.ResponseFormatDto;
-import com.bookMyShow.bookMyShow.Dto.SignUpResponseDto;
-import com.bookMyShow.bookMyShow.Dto.SignUpRequestDto;
+import com.bookMyShow.bookMyShow.Dto.*;
+import com.bookMyShow.bookMyShow.config.auth.JwtService;
 import com.bookMyShow.bookMyShow.constants.ApiConstant;
 import com.bookMyShow.bookMyShow.models.User;
 import com.bookMyShow.bookMyShow.services.UserService;
@@ -27,6 +25,9 @@ public class UserController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    JwtService jwtService;
 
     @PostMapping("/signup")
     public ResponseEntity<ResponseFormatDto> signup(@Valid @RequestBody SignUpRequestDto signUpRequestDto) {
@@ -53,19 +54,22 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<ResponseFormatDto> login(@Valid @RequestBody LoginRequestDto loginRequestDto) {
 
-        User user = userService.login(
+        User authenticatedUser = userService.login(
                 loginRequestDto.getEmail(),
                 loginRequestDto.getPassword()
         );
 
-        SignUpResponseDto signUpResponseDto = SignUpResponseDto.builder()
-                .name(user.getName())
-                .email(user.getEmail())
-                .gender(user.getGender())
+        String jwtToken = jwtService.generateToken(authenticatedUser);
+
+        LoginResponseDto loginResponseDto = LoginResponseDto.builder()
+                .name(authenticatedUser.getName())
+                .email(authenticatedUser.getEmail())
+                .gender(authenticatedUser.getGender())
+                .token(jwtToken)
                 .build();
 
         ResponseFormatDto response = ResponseFormatDto.builder()
-                .data(signUpResponseDto)
+                .data(loginResponseDto)
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.OK);

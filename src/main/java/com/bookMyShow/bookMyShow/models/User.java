@@ -1,6 +1,7 @@
 package com.bookMyShow.bookMyShow.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,6 @@ public class User extends BaseModel {
     private String password;
     private String name;
     private Gender gender;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
 }

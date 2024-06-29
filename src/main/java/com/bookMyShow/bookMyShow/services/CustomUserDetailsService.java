@@ -2,6 +2,7 @@ package com.bookMyShow.bookMyShow.services;
 
 import com.bookMyShow.bookMyShow.models.User;
 import com.bookMyShow.bookMyShow.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,6 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     UserRepository userRepository;
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String usernameOrEmail)  {
         User user = userRepository.findByEmail(usernameOrEmail)
                 .orElseThrow(() ->

@@ -67,6 +67,12 @@ public class ApplicationExceptionHandler {
         return buildErrorResponse(ex,HttpStatus.INTERNAL_SERVER_ERROR,true);
     }
 
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(value= MissingAuthorizationHeaderException.class)
+    public ResponseEntity<Object> handleMissingAuthorizationHeader(MissingAuthorizationHeaderException ex) {
+        return buildErrorResponse(ex,HttpStatus.UNAUTHORIZED,false);
+    }
+
     private ResponseEntity<Object> buildErrorResponse(Exception exception,
                                                       HttpStatus httpStatus,
                                                       Boolean isTraceOn) {
