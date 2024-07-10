@@ -21,13 +21,13 @@ import static com.bookMyShow.bookMyShow.constants.UserConstant.USER_BASE_URL;
 @RequestMapping(ApiConstant.API_V1_VERSIONING + USER_BASE_URL)
 public class UserController {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    JwtService jwtService;
+    private JwtService jwtService;
 
     @PostMapping("/signup")
     public ResponseEntity<ResponseFormatDto> signup(@Valid @RequestBody SignUpRequestDto signUpRequestDto) {
