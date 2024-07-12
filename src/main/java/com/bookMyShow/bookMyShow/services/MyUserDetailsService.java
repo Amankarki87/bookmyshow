@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Service
 public class MyUserDetailsService implements UserDetailsService {
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     @Transactional
