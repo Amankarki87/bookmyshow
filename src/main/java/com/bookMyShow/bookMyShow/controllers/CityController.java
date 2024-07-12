@@ -10,6 +10,7 @@ import com.bookMyShow.bookMyShow.services.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(ApiConstant.API_V1_VERSIONING + CityConstant.CITY_BASE_URL)
 public class CityController {
     @Autowired
-    CityService cityService;
+    private CityService cityService;
 
+    @PreAuthorize("hasAuthority('PRIVILEGE_CITY_CREATE')")
     @PostMapping
-    public ResponseEntity<ResponseFormatDto> save(@RequestBody CityRequestDto cityRequestDto) {
-        City city = cityService.save(cityRequestDto.getName());
+    public ResponseEntity<ResponseFormatDto> createCity(@RequestBody CityRequestDto cityRequestDto) {
+        City city = cityService.createCity(cityRequestDto.getName());
 
         CityResponseDto cityResponseDto = CityResponseDto.builder().
                 id(city.getId()).

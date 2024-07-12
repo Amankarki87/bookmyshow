@@ -8,5 +8,6 @@ public enum PrivilegeEnum {
     THEATRE_READ,
     THEATRE_CREATE,
     THEATRE_UPDATE,
-    THEATRE_DELETE
+    THEATRE_DELETE,
+    CITY_CREATE
 }

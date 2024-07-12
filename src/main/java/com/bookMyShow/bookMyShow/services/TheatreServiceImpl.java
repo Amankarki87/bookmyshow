@@ -1,15 +1,12 @@
 package com.bookMyShow.bookMyShow.services;
 
-import com.bookMyShow.bookMyShow.constants.ApiConstant;
-import com.bookMyShow.bookMyShow.constants.CityConstant;
-import com.bookMyShow.bookMyShow.exceptions.Error;
+import com.bookMyShow.bookMyShow.exceptions.ElementNotFoundException;
 import com.bookMyShow.bookMyShow.models.City;
 import com.bookMyShow.bookMyShow.models.Theatre;
 import com.bookMyShow.bookMyShow.repositories.CityRepository;
 import com.bookMyShow.bookMyShow.repositories.TheatreRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,13 +17,13 @@ import java.util.Optional;
 @Service
 public class TheatreServiceImpl implements TheatreService {
     @Autowired
-    TheatreRepository theatreRepository;
+    private TheatreRepository theatreRepository;
 
     @Autowired
-    CityRepository cityRepository;
+    private CityRepository cityRepository;
 
     @Override
-    public Theatre save(String name, String address,Long cityId) {
+    public Theatre createTheatre(String name, String address,Long cityId) {
         Theatre theatre = new Theatre();
         theatre.setName(name);
         theatre.setAddress(address);
@@ -34,15 +31,7 @@ public class TheatreServiceImpl implements TheatreService {
         Optional<City> city = cityRepository.findById(cityId);
 
         if(!city.isPresent()) {
-
-            Error error = Error
-                    .builder()
-                    .code(HttpStatus.NOT_FOUND)
-                    .status(ApiConstant.ERROR)
-                    .message(CityConstant.CITY_NOT_FOUND)
-                    .build();
-
-            throw error;
+            throw new ElementNotFoundException("City does not exists");
         }
 
         theatre.setCity(city.get());
