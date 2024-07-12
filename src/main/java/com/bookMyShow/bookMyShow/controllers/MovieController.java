@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,6 +19,7 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
+    @PreAuthorize("hasAuthority('PRIVILEGE_MOVIE_CREATE')")
     @PostMapping
     public ResponseEntity<ResponseFormatDto> createMovie(@Valid @RequestBody MovieRequestDto movieRequestDto) {
         Movie movie = movieService.createMovie(

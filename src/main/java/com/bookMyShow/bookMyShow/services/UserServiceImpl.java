@@ -2,8 +2,10 @@ package com.bookMyShow.bookMyShow.services;
 
 import com.bookMyShow.bookMyShow.constants.UserConstant;
 import com.bookMyShow.bookMyShow.exceptions.ElementAlreadyExistsException;
+import com.bookMyShow.bookMyShow.exceptions.ElementNotFoundException;
 import com.bookMyShow.bookMyShow.models.Gender;
 import com.bookMyShow.bookMyShow.models.Role;
+import com.bookMyShow.bookMyShow.models.RoleEnum;
 import com.bookMyShow.bookMyShow.models.User;
 import com.bookMyShow.bookMyShow.repositories.RoleRepository;
 import com.bookMyShow.bookMyShow.repositories.UserRepository;
@@ -15,7 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,26 +35,25 @@ public class UserServiceImpl implements UserService {
     private AuthenticationManager authenticationManager;
 
     @Override
-    public User signup(String email, String password, Gender gender, List<Role> roles) {
+    public User signup(String email, String password, Gender gender, List<RoleEnum> rolesDto) {
         Optional<User> user = userRepository.findByEmail(email);
 
         if (user.isPresent()) {
             throw new ElementAlreadyExistsException(UserConstant.EMAIL_ALREADY_EXISTS);
         }
 
-        List<Role> roleArray = new ArrayList<>();
-        roles.forEach(role -> {
-            Role roleDto = roleRepository.save(role);
-            roleArray.add(roleDto);
-        });
+        List<Role> roles = roleRepository.findByNameIn(rolesDto);
 
+        if (roles.isEmpty()) {
+            throw new ElementNotFoundException("No roles found");
+        }
 
         User userDto = User
                 .builder()
                 .email(email)
                 .password(passwordEncoder.encode(password))
                 .gender(gender)
-                .roles(roleArray)
+                .roles(roles)
                 .build();
 
         User result = userRepository.save(userDto);

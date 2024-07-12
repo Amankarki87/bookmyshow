@@ -1,7 +1,7 @@
 package com.bookMyShow.bookMyShow.Dto;
 
 import com.bookMyShow.bookMyShow.models.Gender;
-import com.bookMyShow.bookMyShow.models.Role;
+import com.bookMyShow.bookMyShow.models.RoleEnum;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -25,5 +25,5 @@ public class SignUpRequestDto {
     private String name;
 
     private Gender gender;
-    private List<Role> roles;
+    private List<RoleEnum> roles;
 }

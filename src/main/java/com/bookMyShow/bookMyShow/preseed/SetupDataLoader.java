@@ -32,14 +32,41 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         if (alreadySetup)
             return;
 
-        Privilege readPrivilege
-                = createPrivilegeIfNotFound(PrivilegeEnum.READ_PRIVILIGE);
-        Privilege writePrivilege
-                = createPrivilegeIfNotFound(PrivilegeEnum.WRITE_PRIVILIGE);
 
-        List<Privilege> adminPrivileges = Arrays.asList(readPrivilege, writePrivilege);
+        Privilege movieReadPrivilege = createPrivilegeIfNotFound(PrivilegeEnum.MOVIE_READ);
+        Privilege movieCreatePrivilege = createPrivilegeIfNotFound(PrivilegeEnum.MOVIE_CREATE);
+        Privilege movieUpdatePrivilege = createPrivilegeIfNotFound(PrivilegeEnum.MOVIE_UPDATE);
+        Privilege movieDeletePrivilege = createPrivilegeIfNotFound(PrivilegeEnum.MOVIE_DELETE);
+        Privilege theatreReadPrivilege = createPrivilegeIfNotFound(PrivilegeEnum.THEATRE_READ);
+        Privilege theatreCreatePrivilege = createPrivilegeIfNotFound(PrivilegeEnum.THEATRE_CREATE);
+        Privilege theatreUpdatePrivilege = createPrivilegeIfNotFound(PrivilegeEnum.THEATRE_UPDATE);
+        Privilege theatreDeletePrivilege = createPrivilegeIfNotFound(PrivilegeEnum.THEATRE_DELETE);
+
+        List<Privilege> adminPrivileges = Arrays.asList(
+                movieReadPrivilege,
+                movieCreatePrivilege,
+                movieUpdatePrivilege,
+                movieDeletePrivilege,
+                theatreReadPrivilege,
+                theatreCreatePrivilege,
+                theatreUpdatePrivilege,
+                theatreDeletePrivilege
+        );
+
         createRoleIfNotFound(RoleEnum.ADMIN, adminPrivileges);
-        createRoleIfNotFound(RoleEnum.USER, Arrays.asList(readPrivilege));
+
+        createRoleIfNotFound(RoleEnum.MANAGER, Arrays.asList(
+                movieReadPrivilege,
+                movieCreatePrivilege,
+                movieUpdatePrivilege,
+                movieDeletePrivilege,
+                theatreReadPrivilege
+        ));
+
+        createRoleIfNotFound(RoleEnum.USER, Arrays.asList(
+                movieReadPrivilege,
+                theatreReadPrivilege
+        ));
 
         alreadySetup = true;
     }
