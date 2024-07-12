@@ -41,6 +41,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Privilege theatreCreatePrivilege = createPrivilegeIfNotFound(PrivilegeEnum.THEATRE_CREATE);
         Privilege theatreUpdatePrivilege = createPrivilegeIfNotFound(PrivilegeEnum.THEATRE_UPDATE);
         Privilege theatreDeletePrivilege = createPrivilegeIfNotFound(PrivilegeEnum.THEATRE_DELETE);
+        Privilege cityCreatePrivilege = createPrivilegeIfNotFound(PrivilegeEnum.CITY_CREATE);
 
         List<Privilege> adminPrivileges = Arrays.asList(
                 movieReadPrivilege,
@@ -50,7 +51,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                 theatreReadPrivilege,
                 theatreCreatePrivilege,
                 theatreUpdatePrivilege,
-                theatreDeletePrivilege
+                theatreDeletePrivilege,
+                cityCreatePrivilege
         );
 
         createRoleIfNotFound(RoleEnum.ADMIN, adminPrivileges);

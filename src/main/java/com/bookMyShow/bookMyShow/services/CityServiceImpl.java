@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 public class CityServiceImpl implements CityService {
 
     @Autowired
-    CityRepository cityRepository;
+    private CityRepository cityRepository;
 
     @Override
-    public City save(String name) {
+    public City createCity(String name) {
         City city = new City();
         city.setName(name);
         City result = cityRepository.save(city);
