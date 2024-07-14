@@ -8,33 +8,47 @@ import com.bookMyShow.bookMyShow.services.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping(ApiConstant.API_V1_VERSIONING + SeatConstant.SEAT_BASE_URL)
 public class SeatController {
     @Autowired
-    SeatService seatService;
+    private SeatService seatService;
 
+    @PreAuthorize("hasAuthority('PRIVILEGE_THEATRE_CREATE')")
     @PostMapping
-    public ResponseEntity<ResponseFormatDto> save(@RequestBody SeatRequestDto seatRequestDto) {
-        Seat seat = seatService.save(seatRequestDto.getSeatNumber(),seatRequestDto.getSeatType(),seatRequestDto.getAuditoriumId());
+    public ResponseEntity<ResponseFormatDto> createSeat(@RequestBody SeatRequestDto seatRequestDto) {
+        List<Seat> seats = seatService.createSeat(
+                seatRequestDto.getAuditoriumId(),
+                seatRequestDto.getSeats()
+        );
 
-        SeatResponseDto seatResponseDto = SeatResponseDto.builder()
-                .seatNumber(seat.getSeatNumber())
-                .seatType(seat.getSeatType())
-                .id(seat.getId())
-                .auditoriumId(seat.getAuditorium().getId())
+        List<SeatResponseDto> response = new ArrayList<>();
+
+        seats.forEach(seat -> {
+            SeatResponseDto seatResponseDto = SeatResponseDto.builder()
+                    .seatNumber(seat.getSeatNumber())
+                    .seatType(seat.getSeatType())
+                    .id(seat.getId())
+                    .auditoriumId(seat.getAuditorium().getId())
+                    .build();
+
+            response.add(seatResponseDto);
+        });
+
+        ResponseFormatDto result = ResponseFormatDto.builder()
+                .data(response)
                 .build();
 
-        ResponseFormatDto response = ResponseFormatDto.builder()
-                .data(seatResponseDto)
-                .build();
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

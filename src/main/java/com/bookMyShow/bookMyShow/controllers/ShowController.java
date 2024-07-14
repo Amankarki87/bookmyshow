@@ -22,8 +22,8 @@ public class ShowController {
     ShowService showService;
 
     @PostMapping
-    public ResponseEntity<ResponseFormatDto> save(@RequestBody ShowRequestDto showRequestDto) {
-        Show show = showService.save(showRequestDto.getStartTime(), showRequestDto.getEndTime(),showRequestDto.getMovieId(),showRequestDto.getAuditoriumId());
+    public ResponseEntity<ResponseFormatDto> createShow(@RequestBody ShowRequestDto showRequestDto) {
+        Show show = showService.createShow(showRequestDto.getStartTime(), showRequestDto.getEndTime(),showRequestDto.getMovieId(),showRequestDto.getAuditoriumId());
 
         ShowResponseDto showResponseDto = ShowResponseDto.builder().
                 id(show.getId()).

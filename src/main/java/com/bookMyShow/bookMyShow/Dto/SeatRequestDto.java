@@ -1,11 +1,11 @@
 package com.bookMyShow.bookMyShow.Dto;
 
-import com.bookMyShow.bookMyShow.models.SeatType;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class SeatRequestDto {
-    private String seatNumber;
-    private SeatType seatType;
     private Long auditoriumId;
+    private List<SeatDto> seats;
 }

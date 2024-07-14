@@ -3,6 +3,7 @@ package com.bookMyShow.bookMyShow.services;
 import com.bookMyShow.bookMyShow.constants.ApiConstant;
 import com.bookMyShow.bookMyShow.constants.AuditoriumConstant;
 import com.bookMyShow.bookMyShow.constants.MovieConstant;
+import com.bookMyShow.bookMyShow.exceptions.ElementNotFoundException;
 import com.bookMyShow.bookMyShow.exceptions.Error;
 import com.bookMyShow.bookMyShow.models.Auditorium;
 import com.bookMyShow.bookMyShow.models.Movie;
@@ -19,39 +20,26 @@ import java.util.Optional;
 @Service
 public class ShowServiceImpl implements ShowService {
     @Autowired
-    ShowRepository showRepository;
+    private ShowRepository showRepository;
 
     @Autowired
-    AuditoriumRepository auditoriumRepository;
+    private AuditoriumRepository auditoriumRepository;
 
     @Autowired
-    MovieRepository movieRepository;
+    private MovieRepository movieRepository;
 
     @Override
-    public Show save(String startTime, String endTime,Long movieId,Long auditoriumId) {
+    public Show createShow(String startTime, String endTime,Long movieId,Long auditoriumId) {
         Optional<Auditorium> auditorium = auditoriumRepository.findById(auditoriumId);
 
-        if(!auditorium.isPresent()) {
-
-            Error error = Error.builder()
-                    .code(HttpStatus.NOT_FOUND)
-                    .status(ApiConstant.ERROR)
-                    .message(AuditoriumConstant.AUDITORIUM_NOT_FOUND)
-                    .build();
-
-            throw error;
+        if(auditorium.isEmpty()) {
+            throw new ElementNotFoundException("Auditorium not found");
         }
 
         Optional<Movie> movie = movieRepository.findById(movieId);
 
         if(!movie.isPresent()) {
-            Error error = Error.builder()
-                    .code(HttpStatus.NOT_FOUND)
-                    .status(ApiConstant.ERROR)
-                    .message(MovieConstant.MOVIE_NOT_FOUND)
-                    .build();
-
-            throw error;
+            throw new ElementNotFoundException("Movie not found");
         }
 
         Show show = new Show();
