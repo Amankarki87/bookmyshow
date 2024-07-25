@@ -1,6 +1,6 @@
 package com.bookMyShow.bookMyShow.services;
 
-import com.bookMyShow.bookMyShow.constants.ApiConstant;
+import com.bookMyShow.bookMyShow.constants.ErrorMessages;
 import com.bookMyShow.bookMyShow.exceptions.ElementAlreadyExistsException;
 import com.bookMyShow.bookMyShow.models.Genre;
 import com.bookMyShow.bookMyShow.models.Movie;
@@ -19,7 +19,7 @@ public class MovieServiceImpl implements MovieService {
         Optional<Movie> movie = movieRepository.findByName(name);
 
         if (movie.isPresent()) {
-            throw new ElementAlreadyExistsException(ApiConstant.MOVIE_ALREADY_EXISTS);
+            throw new ElementAlreadyExistsException(ErrorMessages.MOVIE_ALREADY_EXISTS);
         }
 
         Movie movieDto = Movie

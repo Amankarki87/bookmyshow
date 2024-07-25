@@ -1,15 +1,16 @@
 package com.bookMyShow.bookMyShow.models;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@Setter
+@Getter
 @Entity
-@Data
 public class Auditorium extends BaseModel {
     private String name;
 

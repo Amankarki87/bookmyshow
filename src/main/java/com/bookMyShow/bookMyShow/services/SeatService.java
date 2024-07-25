@@ -1,8 +1,10 @@
 package com.bookMyShow.bookMyShow.services;
 
+import com.bookMyShow.bookMyShow.Dto.SeatDto;
 import com.bookMyShow.bookMyShow.models.Seat;
-import com.bookMyShow.bookMyShow.models.SeatType;
+
+import java.util.List;
 
 public interface SeatService {
-    Seat save(String seatNumber, SeatType seatType, Long auditoriumId);
+    List<Seat> createSeat(Long auditoriumId, List<SeatDto> seats);
 }

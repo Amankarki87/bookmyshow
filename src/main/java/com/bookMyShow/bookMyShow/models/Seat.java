@@ -4,10 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
-@Data
 public class Seat extends BaseModel {
     private String seatNumber;
 
@@ -16,4 +18,6 @@ public class Seat extends BaseModel {
 
     @ManyToOne
     private Auditorium auditorium;
+
+    private String row;
 }

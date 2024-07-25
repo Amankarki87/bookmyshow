@@ -1,26 +1,27 @@
 package com.bookMyShow.bookMyShow.controllers;
 
 import com.bookMyShow.bookMyShow.Dto.*;
-import com.bookMyShow.bookMyShow.constants.ApiConstant;
-import com.bookMyShow.bookMyShow.constants.TheatreConstant;
+import com.bookMyShow.bookMyShow.constants.UrlConstant;
 import com.bookMyShow.bookMyShow.models.Theatre;
 import com.bookMyShow.bookMyShow.services.TheatreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(ApiConstant.API_V1_VERSIONING + TheatreConstant.THEATRE_BASE_URL)
+@RequestMapping(UrlConstant.API_V1_VERSIONING + UrlConstant.THEATRE_BASE_URL)
 public class TheatreController {
     @Autowired
-    TheatreService theatreService;
+    private TheatreService theatreService;
 
+    @PreAuthorize("hasAuthority('PRIVILEGE_THEATRE_CREATE')")
     @PostMapping
-    public ResponseEntity<ResponseFormatDto> save(@RequestBody TheatreRequestDto theatreRequestDto) {
-        Theatre theatre = theatreService.save(
+    public ResponseEntity<ResponseFormatDto> createTheatre(@RequestBody TheatreRequestDto theatreRequestDto) {
+        Theatre theatre = theatreService.createTheatre(
                 theatreRequestDto.getName(),
                 theatreRequestDto.getAddress(),
                 theatreRequestDto.getCityId()
