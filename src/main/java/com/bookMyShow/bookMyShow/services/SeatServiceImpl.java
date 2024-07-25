@@ -1,6 +1,7 @@
 package com.bookMyShow.bookMyShow.services;
 
 import com.bookMyShow.bookMyShow.Dto.SeatDto;
+import com.bookMyShow.bookMyShow.constants.ErrorMessages;
 import com.bookMyShow.bookMyShow.exceptions.ElementAlreadyExistsException;
 import com.bookMyShow.bookMyShow.exceptions.ElementNotFoundException;
 import com.bookMyShow.bookMyShow.models.Auditorium;
@@ -29,7 +30,7 @@ public class SeatServiceImpl implements SeatService {
         Optional<Auditorium> auditorium = auditoriumRepository.findById(auditoriumId);
 
         if (auditorium.isEmpty()) {
-            throw new ElementNotFoundException("Auditorium not found");
+            throw new ElementNotFoundException(ErrorMessages.AUDITORIUM_NOT_FOUND);
         }
 
         List<String> seatNumbers = seatDetailsDto.stream()

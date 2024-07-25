@@ -1,8 +1,7 @@
 package com.bookMyShow.bookMyShow.controllers;
 
 import com.bookMyShow.bookMyShow.Dto.*;
-import com.bookMyShow.bookMyShow.constants.ApiConstant;
-import com.bookMyShow.bookMyShow.constants.ShowSeatConstant;
+import com.bookMyShow.bookMyShow.constants.UrlConstant;
 import com.bookMyShow.bookMyShow.models.ShowSeat;
 import com.bookMyShow.bookMyShow.services.ShowSeatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(ApiConstant.API_V1_VERSIONING + ShowSeatConstant.SHOW_SEAT_BASE_URL)
+@RequestMapping(UrlConstant.API_V1_VERSIONING + UrlConstant.SHOW_SEAT_BASE_URL)
 public class ShowSeatController {
     @Autowired
     ShowSeatService showSeatService;

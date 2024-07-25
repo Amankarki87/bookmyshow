@@ -1,5 +1,6 @@
 package com.bookMyShow.bookMyShow.services;
 
+import com.bookMyShow.bookMyShow.constants.ErrorMessages;
 import com.bookMyShow.bookMyShow.exceptions.ElementNotFoundException;
 import com.bookMyShow.bookMyShow.models.City;
 import com.bookMyShow.bookMyShow.models.Theatre;
@@ -31,7 +32,7 @@ public class TheatreServiceImpl implements TheatreService {
         Optional<City> city = cityRepository.findById(cityId);
 
         if(!city.isPresent()) {
-            throw new ElementNotFoundException("City does not exists");
+            throw new ElementNotFoundException(ErrorMessages.CITY_NOT_FOUND);
         }
 
         theatre.setCity(city.get());

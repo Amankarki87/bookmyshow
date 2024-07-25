@@ -1,5 +1,6 @@
 package com.bookMyShow.bookMyShow.services;
 
+import com.bookMyShow.bookMyShow.constants.ErrorMessages;
 import com.bookMyShow.bookMyShow.exceptions.ElementAlreadyExistsException;
 import com.bookMyShow.bookMyShow.exceptions.ElementNotFoundException;
 import com.bookMyShow.bookMyShow.models.Auditorium;
@@ -27,7 +28,7 @@ public class AuditoriumServiceImpl implements AuditoriumService {
         Optional<Theatre> theatre = theatreRepository.findById(theatreId);
 
         if(theatre.isEmpty()) {
-            throw new ElementNotFoundException("No Theatre found");
+            throw new ElementNotFoundException(ErrorMessages.THEATRE_NOT_FOUND);
         }
 
         Optional<Auditorium> auditorium = auditoriumRepository.findByNameAndTheatreId(
@@ -36,7 +37,7 @@ public class AuditoriumServiceImpl implements AuditoriumService {
         );
 
         if(auditorium.isPresent()) {
-            throw new ElementAlreadyExistsException("Auditorium already exists in theatre");
+            throw new ElementAlreadyExistsException(ErrorMessages.AUDITORIUM_EXISTS);
         }
 
         Auditorium auditoriumDto = new Auditorium();

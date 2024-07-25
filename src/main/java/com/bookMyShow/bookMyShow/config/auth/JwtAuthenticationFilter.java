@@ -1,10 +1,12 @@
 package com.bookMyShow.bookMyShow.config.auth;
 
+import com.bookMyShow.bookMyShow.exceptions.ElementNotFoundException;
 import io.micrometer.common.lang.NonNull;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -69,6 +71,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
 
             filterChain.doFilter(request, response);
+        } catch (ElementNotFoundException ex) {
+            response.sendError(HttpStatus.NOT_FOUND.value(), ex.getMessage());
         } catch (Exception exception) {
             handlerExceptionResolver.resolveException(request, response, null, exception);
         }

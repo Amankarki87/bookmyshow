@@ -1,8 +1,7 @@
 package com.bookMyShow.bookMyShow.controllers;
 
 import com.bookMyShow.bookMyShow.Dto.*;
-import com.bookMyShow.bookMyShow.constants.ApiConstant;
-import com.bookMyShow.bookMyShow.constants.MovieConstant;
+import com.bookMyShow.bookMyShow.constants.UrlConstant;
 import com.bookMyShow.bookMyShow.models.Movie;
 import com.bookMyShow.bookMyShow.services.MovieService;
 import jakarta.validation.Valid;
@@ -13,7 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(ApiConstant.API_V1_VERSIONING + MovieConstant.MOVIE_BASE_URL)
+@RequestMapping(UrlConstant.API_V1_VERSIONING + UrlConstant.MOVIE_BASE_URL)
 public class MovieController {
 
     @Autowired

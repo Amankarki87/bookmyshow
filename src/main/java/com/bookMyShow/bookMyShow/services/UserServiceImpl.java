@@ -1,6 +1,6 @@
 package com.bookMyShow.bookMyShow.services;
 
-import com.bookMyShow.bookMyShow.constants.UserConstant;
+import com.bookMyShow.bookMyShow.constants.ErrorMessages;
 import com.bookMyShow.bookMyShow.exceptions.ElementAlreadyExistsException;
 import com.bookMyShow.bookMyShow.exceptions.ElementNotFoundException;
 import com.bookMyShow.bookMyShow.models.Gender;
@@ -39,13 +39,13 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = userRepository.findByEmail(email);
 
         if (user.isPresent()) {
-            throw new ElementAlreadyExistsException(UserConstant.EMAIL_ALREADY_EXISTS);
+            throw new ElementAlreadyExistsException(ErrorMessages.EMAIL_ALREADY_EXISTS);
         }
 
         List<Role> roles = roleRepository.findByNameIn(rolesDto);
 
         if (roles.isEmpty()) {
-            throw new ElementNotFoundException("No roles found");
+            throw new ElementNotFoundException(ErrorMessages.NO_ROLE_FOUND);
         }
 
         User userDto = User

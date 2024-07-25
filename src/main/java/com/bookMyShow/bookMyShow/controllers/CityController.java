@@ -3,8 +3,7 @@ package com.bookMyShow.bookMyShow.controllers;
 import com.bookMyShow.bookMyShow.Dto.CityRequestDto;
 import com.bookMyShow.bookMyShow.Dto.CityResponseDto;
 import com.bookMyShow.bookMyShow.Dto.ResponseFormatDto;
-import com.bookMyShow.bookMyShow.constants.ApiConstant;
-import com.bookMyShow.bookMyShow.constants.CityConstant;
+import com.bookMyShow.bookMyShow.constants.UrlConstant;
 import com.bookMyShow.bookMyShow.models.City;
 import com.bookMyShow.bookMyShow.services.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(ApiConstant.API_V1_VERSIONING + CityConstant.CITY_BASE_URL)
+@RequestMapping(UrlConstant.API_V1_VERSIONING + UrlConstant.CITY_BASE_URL)
 public class CityController {
     @Autowired
     private CityService cityService;

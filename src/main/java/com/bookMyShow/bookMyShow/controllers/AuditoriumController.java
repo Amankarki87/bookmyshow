@@ -3,8 +3,7 @@ package com.bookMyShow.bookMyShow.controllers;
 import com.bookMyShow.bookMyShow.Dto.AuditoriumRequestDto;
 import com.bookMyShow.bookMyShow.Dto.AuditoriumResponseDto;
 import com.bookMyShow.bookMyShow.Dto.ResponseFormatDto;
-import com.bookMyShow.bookMyShow.constants.ApiConstant;
-import com.bookMyShow.bookMyShow.constants.AuditoriumConstant;
+import com.bookMyShow.bookMyShow.constants.UrlConstant;
 import com.bookMyShow.bookMyShow.models.Auditorium;
 import com.bookMyShow.bookMyShow.services.AuditoriumService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(ApiConstant.API_V1_VERSIONING + AuditoriumConstant.AUDITORIUM_BASE_URL)
+@RequestMapping(UrlConstant.API_V1_VERSIONING + UrlConstant.AUDITORIUM_BASE_URL)
 public class AuditoriumController {
     @Autowired
     private AuditoriumService auditoriumService;
