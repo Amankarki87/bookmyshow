@@ -3,6 +3,8 @@ package com.bookMyShow.bookMyShow.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Date;
+
 @Entity
 @Data
 @Table(name = "show_seat_mapping")
@@ -24,4 +26,6 @@ public class ShowSeat extends BaseModel {
 
     @Enumerated(EnumType.STRING)
     private ShowSeatState state;
+
+    private Date lockedAt;
 }

@@ -16,4 +16,7 @@ public interface SeatRepository extends JpaRepository<Seat,Long>  {
             @Param("auditoriumId") Long auditoriumId,
             @Param("seatNumbers") List<String> seatNumbers
     );
+
+    @Query(value="select seat from Seat seat where seat.id in :seatIds ")
+    List<Seat> findAllByIdIn(@Param("seatIds") List<Long> seatIds);
 }
