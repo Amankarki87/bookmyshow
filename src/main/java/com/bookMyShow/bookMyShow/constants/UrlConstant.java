@@ -10,4 +10,5 @@ public interface UrlConstant {
     String SHOW_SEAT_BASE_URL = "/showseats";
     String THEATRE_BASE_URL = "/theatres";
     String USER_BASE_URL = "/users";
+    String BOOKING_BASE_URL = "/bookings";
 }
